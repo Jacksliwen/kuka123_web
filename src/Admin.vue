@@ -340,6 +340,80 @@
           </div>
         </section>
 
+        <!-- ⑤ 点击统计 -->
+        <section v-show="tab==='stats'" class="adm-sec">
+          <div class="stats-header">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div>
+                <h3 class="sc-title">点击统计分析</h3>
+                <p class="sc-desc">展示各网站的访问热度，数据按点击量从高到低排列</p>
+              </div>
+              <div class="stats-toolbar">
+                <button class="tbtn ghost" v-if="!statsEditMode" @click="statsEditMode=true" title="进入编辑模式">
+                  ✏️ 编辑
+                </button>
+                <button class="tbtn primary" v-if="statsEditMode" @click="saveStatsChanges" title="保存修改">
+                  💾 保存修改
+                </button>
+                <button class="tbtn danger" v-if="statsEditMode" @click="cancelStatsEdit" title="取消编辑">
+                  ✖️ 取消
+                </button>
+                <button class="tbtn" @click="resetAllStats" :disabled="statsEditMode" title="全部归零">
+                  🔄 全部归零
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="stats-container">
+            <!-- 图表 -->
+            <div class="chart-wrap">
+              <canvas ref="chartCanvas" id="statsChart"></canvas>
+            </div>
+            
+            <!-- 数据表格 -->
+            <div class="stats-table-wrap">
+              <table class="stats-table">
+                <thead>
+                  <tr>
+                    <th style="width:50px">排名</th>
+                    <th>网站名称</th>
+                    <th>分类</th>
+                    <th style="width:140px">点击量{{ statsEditMode ? '（可编辑）' : '' }}</th>
+                    <th>比例</th>
+                    <th v-if="statsEditMode" style="width:100px">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, idx) in sortedStats" :key="item.url">
+                    <td><span class="rank-badge" :class="getRankClass(idx)">{{ idx + 1 }}</span></td>
+                    <td class="cell-name">{{ item.name }}</td>
+                    <td class="cell-cat">{{ item.catLabel }}</td>
+                    <td class="cell-count">
+                      <input v-if="statsEditMode" type="number" class="stat-edit-input" v-model.number="item.clickCount" min="0"/>
+                      <strong v-else>{{ item.clickCount }}</strong>
+                    </td>
+                    <td>
+                      <div class="progress-bar">
+                        <div class="progress-fill" :style="{width: getPercentage(item.clickCount) + '%'}"></div>
+                      </div>
+                    </td>
+                    <td v-if="statsEditMode">
+                      <div class="row-acts">
+                        <button class="tbtn-sm warning" @click="resetSingleStat(item)" title="单个归零">
+                          清零
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr v-if="sortedStats.length === 0">
+                    <td :colspan="statsEditMode ? 6 : 5" class="empty-row">暂无数据</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
 
       </main>
     </div>
@@ -376,6 +450,7 @@
 <script setup>
 import { ref, computed, reactive, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import Chart from 'chart.js/auto'
 
 const router    = useRouter()
 const dark      = ref(false)
@@ -504,6 +579,7 @@ const tabs = [
   { id:'site',      icon:'⚙️',  label:'网站设置'   },
   { id:'cats',      icon:'📂', label:'分类管理'   },
   { id:'sites',     icon:'🔗', label:'网址管理'   },
+  { id:'stats',     icon:'📈', label:'点击统计'   },
 ]
 
 const currentTab = computed(() => tabs.find(t => t.id === tab.value))
@@ -863,6 +939,184 @@ function modalCancel() {
   modalResolve = null
   modalReject = null
 }
+
+/* ── 点击统计 ── */
+const chartCanvas = ref(null)
+let chartInstance = null
+const statsEditMode = ref(false)
+const statsBackup = ref(null) // 备份原始数据用于取消编辑
+
+// 聚合所有网站的点击数
+const sortedStats = computed(() => {
+  const allSites = []
+  cats.forEach(cat => {
+    cat.sites.forEach(site => {
+      allSites.push({
+        name: site.name,
+        url: site.url,
+        clickCount: site.clickCount || 0,
+        catLabel: cat.label
+      })
+    })
+  })
+  // 按点击数从高到低排序
+  return allSites.sort((a, b) => b.clickCount - a.clickCount)
+})
+
+// 计算百分比显示
+function getPercentage(count) {
+  if (sortedStats.value.length === 0) return 0
+  const maxCount = sortedStats.value[0]?.clickCount || 1
+  return Math.round((count / maxCount) * 100)
+}
+
+// 获取排名样式
+function getRankClass(index) {
+  if (index === 0) return 'gold'
+  if (index === 1) return 'silver'
+  if (index === 2) return 'bronze'
+  return ''
+}
+
+// 监听 tab 变化，初始化图表
+watch(() => tab.value, (newTab) => {
+  if (newTab === 'stats') {
+    setTimeout(() => {
+      initChart()
+    }, 100)
+  }
+})
+
+// 监听数据变化，更新图表
+watch(() => sortedStats.value, () => {
+  if (tab.value === 'stats') {
+    initChart()
+  }
+}, { deep: true })
+
+// 初始化图表
+function initChart() {
+  if (!chartCanvas.value) return
+  
+  const ctx = chartCanvas.value.getContext('2d')
+  if (!ctx) return
+  
+  // 只显示前 15 个
+  const displayData = sortedStats.value.slice(0, 15)
+  const labels = displayData.map(item => item.name)
+  const data = displayData.map(item => item.clickCount)
+  
+  // 销毁旧图表
+  if (chartInstance) {
+    chartInstance.destroy()
+  }
+  
+  // 创建新图表
+  chartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: '点击量',
+        data: data,
+        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+        borderColor: 'rgba(59, 130, 246, 1)',
+        borderWidth: 1,
+        borderRadius: 4,
+        hoverBackgroundColor: 'rgba(59, 130, 246, 0.9)',
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1
+          }
+        }
+      }
+    }
+  })
+}
+
+// 进入编辑模式，备份数据
+function enterStatsEditMode() {
+  statsBackup.value = JSON.parse(JSON.stringify(
+    cats.map(cat => ({
+      ...cat,
+      sites: cat.sites.map(s => ({ url: s.url, clickCount: s.clickCount }))
+    }))
+  ))
+}
+
+// 保存统计数据修改
+function saveStatsChanges() {
+  statsEditMode.value = false
+  scheduleSave()
+  toast('统计数据已保存', '✅')
+}
+
+// 取消编辑，恢复备份
+function cancelStatsEdit() {
+  if (statsBackup.value) {
+    cats.forEach((cat, ci) => {
+      if (statsBackup.value[ci]) {
+        const backupCat = statsBackup.value[ci]
+        cat.sites.forEach((site, si) => {
+          const backupSite = backupCat.sites.find(s => s.url === site.url)
+          if (backupSite) {
+            site.clickCount = backupSite.clickCount
+          }
+        })
+      }
+    })
+  }
+  statsEditMode.value = false
+  statsBackup.value = null
+  toast('已取消修改', '↩️')
+}
+
+// 单个网站统计归零
+function resetSingleStat(item) {
+  showConfirm('确认操作', `确定要将「${item.name}」的点击量归零吗？`).then(() => {
+    // 在原始数据中找到并重置
+    cats.forEach(cat => {
+      const site = cat.sites.find(s => s.url === item.url && s.name === item.name)
+      if (site) {
+        site.clickCount = 0
+      }
+    })
+    toast(`「${item.name}」已归零`, '🔄')
+  }).catch(() => {})
+}
+
+// 全部统计数据归零
+function resetAllStats() {
+  showConfirm('确认操作', '确定要清空所有网址的点击统计吗？此操作不可恢复！').then(() => {
+    cats.forEach(cat => {
+      cat.sites.forEach(site => {
+        site.clickCount = 0
+      })
+    })
+    toast('所有统计数据已归零', '🔄')
+    scheduleSave()
+  }).catch(() => {})
+}
+
+// 监听编辑模式变化，进入时备份数据
+watch(() => statsEditMode.value, (isEdit) => {
+  if (isEdit) {
+    enterStatsEditMode()
+  }
+})
 
 </script>
 
@@ -1560,6 +1814,191 @@ tr[draggable="true"]:active {
   60%, 100% { content: '...'; }
 }
 
+/* 点击统计页面 */
+.stats-header {
+  margin-bottom: 24px;
+}
+
+.stats-toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.chart-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--card-bd);
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 400px;
+}
+
+.stats-table-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--card-bd);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.stats-table thead {
+  background: var(--table-header-bg, #f3f4f6);
+  font-weight: 600;
+  color: var(--text2);
+}
+
+.dark .stats-table thead {
+  background: #1f2937;
+}
+
+.stats-table th {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--card-bd);
+}
+
+.stats-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--card-bd);
+  color: var(--text);
+}
+
+.stats-table tbody tr:hover {
+  background: var(--table-row-hover-bg, #f9fafb);
+}
+
+.dark .stats-table tbody tr:hover {
+  background: #1f2937;
+}
+
+.stat-edit-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--card-bd);
+  border-radius: 6px;
+  background: var(--input-bg, #fff);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.dark .stat-edit-input {
+  background: #1f2937;
+  color: #fff;
+}
+
+.stat-edit-input:focus {
+  outline: none;
+  border-color: var(--acc);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.rank-badge.gold {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.rank-badge.silver {
+  background: linear-gradient(135deg, #d1d5db, #9ca3af);
+  color: white;
+  box-shadow: 0 2px 8px rgba(156, 163, 175, 0.3);
+}
+
+.rank-badge.bronze {
+  background: linear-gradient(135deg, #d97706, #ca8a04);
+  color: white;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+}
+
+.cell-name {
+  font-weight: 600;
+  color: var(--acc);
+}
+
+.cell-cat {
+  color: var(--text2);
+  font-size: 0.85rem;
+}
+
+.cell-count {
+  color: #3b82f6;
+  font-size: 1.05rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--card-bd);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.stats-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.empty-row {
+  text-align: center;
+  color: var(--text3);
+  padding: 32px !important;
+  font-style: italic;
+}
+
+/* 警告按钮样式 */
+.tbtn.warning {
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.1);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.tbtn.warning:hover {
+  background: rgba(217, 119, 6, 0.2);
+  border-color: rgba(217, 119, 6, 0.5);
+}
+
+.tbtn-sm.warning {
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.1);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  padding: 4px 8px;
+}
+
+.tbtn-sm.warning:hover {
+  background: rgba(217, 119, 6, 0.2);
+}
+
 /* 响应式 */
 @media (max-width:768px) {
   .adm-sb { position:fixed; z-index:200; height:100vh; }
@@ -1568,6 +2007,23 @@ tr[draggable="true"]:active {
   .topbar-stats { display:none; }
   .adm-content { padding:14px; }
   .form-grid { grid-template-columns:1fr; }
+  
+  .stats-container {
+    gap: 16px;
+  }
+  
+  .chart-wrap {
+    min-height: 300px;
+    padding: 16px;
+  }
+  
+  .stats-table {
+    font-size: 0.8rem;
+  }
+  
+  .stats-table th, .stats-table td {
+    padding: 8px 12px;
+  }
 }
 
 /* 拖拽排序 */

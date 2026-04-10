@@ -10,8 +10,9 @@
           "url": "https://www.freertos.org/",
           "desc": "车载嵌入式最主流开源实时内核，官方文档 + API 参考",
           "favicon": "https://www.google.com/s2/favicons?domain=www.freertos.org&sz=64",
-          "_status": "ok",
-          "_responseTime": 419
+          "_status": "slow",
+          "_responseTime": 2207,
+          "clickCount": 0
         },
         {
           "name": "SOME/IP 规范",
@@ -19,7 +20,8 @@
           "desc": "AUTOSAR 官方 SOME/IP 协议规范 PDF，车载服务通信必读",
           "favicon": "https://www.autosar.org/favicon.ico",
           "_status": "ok",
-          "_responseTime": 398
+          "_responseTime": 335,
+          "clickCount": 0
         },
         {
           "name": "OSEK / VDX",
@@ -27,7 +29,8 @@
           "desc": "AUTOSAR Classic 底层 OS 标准，ECU 实时任务调度基础规范",
           "favicon": "https://www.osek-vdx.org/favicon.ico",
           "_status": "ok",
-          "_responseTime": 484
+          "_responseTime": 466,
+          "clickCount": 0
         },
         {
           "name": "vsomeip · COVESA",
@@ -35,15 +38,17 @@
           "desc": "SOME/IP 车载以太网通信协议开源 C++ 实现库",
           "favicon": "https://github.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 310
+          "_responseTime": 182,
+          "clickCount": 0
         },
         {
           "name": "DDS Foundation",
           "url": "https://www.dds-foundation.org/",
           "desc": "数据分发服务（DDS）标准，自动驾驶中间件通信协议",
           "favicon": "https://www.dds-foundation.org/favicon.ico",
-          "_status": "slow",
-          "_responseTime": 1643
+          "_status": "ok",
+          "_responseTime": 992,
+          "clickCount": 0
         },
         {
           "name": "AUTOSAR 官网",
@@ -51,7 +56,8 @@
           "desc": "汽车开放系统架构标准官网，Classic & Adaptive 双平台规范",
           "favicon": "https://www.autosar.org/favicon.ico",
           "_status": "ok",
-          "_responseTime": 406
+          "_responseTime": 807,
+          "clickCount": 0
         },
         {
           "name": "AUTOSAR Standards",
@@ -59,7 +65,8 @@
           "desc": "AUTOSAR 全部标准文档下载入口，Classic / Adaptive / Foundation",
           "favicon": "https://www.autosar.org/favicon.ico",
           "_status": "ok",
-          "_responseTime": 410
+          "_responseTime": 805,
+          "clickCount": 0
         },
         {
           "name": "QNX 开发文档",
@@ -67,7 +74,8 @@
           "desc": "QNX 7.1 实时操作系统官方完整开发文档",
           "favicon": "https://www.qnx.com/favicon.ico",
           "_status": "slow",
-          "_responseTime": 1968
+          "_responseTime": 2416,
+          "clickCount": 0
         },
         {
           "name": "Elektrobit AUTOSAR",
@@ -75,7 +83,8 @@
           "desc": "EB tresos Classic + EB corbos Adaptive，主流 AUTOSAR 基础软件供应商",
           "favicon": "https://www.elektrobit.com/favicon.ico",
           "_status": "slow",
-          "_responseTime": 1373
+          "_responseTime": 1049,
+          "clickCount": 0
         },
         {
           "name": "Arm GNU Toolchain",
@@ -83,23 +92,26 @@
           "desc": "ARM 官方 GNU 交叉编译工具链下载，车载 MCU 必备",
           "favicon": "https://developer.arm.com/favicon.ico",
           "_status": "slow",
-          "_responseTime": 1422
+          "_responseTime": 2046,
+          "clickCount": 0
         },
         {
           "name": "Arm Developer",
           "url": "https://developer.arm.com/",
           "desc": "ARM 官方开发者中心，架构手册 / Cortex 技术文档全集",
           "favicon": "https://developer.arm.com/favicon.ico",
-          "_status": "ok",
-          "_responseTime": 397
+          "_status": "slow",
+          "_responseTime": 1262,
+          "clickCount": 0
         },
         {
           "name": "CMSIS",
           "url": "https://www.keil.arm.com/cmsis/",
           "desc": "ARM Cortex-M 微控制器软件接口标准，外设驱动与 DSP 库",
           "favicon": "https://www.keil.arm.com/favicon.ico",
-          "_status": "ok",
-          "_responseTime": 914
+          "_status": "slow",
+          "_responseTime": 1192,
+          "clickCount": 0
         },
         {
           "name": "OpenOCD",
@@ -107,7 +119,8 @@
           "desc": "开源片上调试工具，支持 JTAG/SWD，嵌入式调试必备",
           "favicon": "https://openocd.org/favicon.ico",
           "_status": "ok",
-          "_responseTime": 839
+          "_responseTime": 934,
+          "clickCount": 0
         },
         {
           "name": "ISO 26262 Wiki",
@@ -115,15 +128,17 @@
           "desc": "道路车辆功能安全国际标准（ISO 26262），ASIL 等级认证依据",
           "favicon": "https://www.iso.org/favicon.ico",
           "_status": "slow",
-          "_responseTime": 2107
+          "_responseTime": 1732,
+          "clickCount": 0
         },
         {
           "name": "Automotive SPICE",
           "url": "https://www.automotivespice.com/",
           "desc": "汽车软件过程评估框架，OEM 供应商体系认证必要标准",
           "favicon": "https://www.automotivespice.com/favicon.ico",
-          "_status": "slow",
-          "_responseTime": 1980
+          "_status": "ok",
+          "_responseTime": 362,
+          "clickCount": 0
         },
         {
           "name": "UDS 协议参考",
@@ -131,31 +146,35 @@
           "desc": "统一诊断服务（UDS/ISO 14229）图文教程，ECU 诊断开发参考",
           "favicon": "https://www.csselectronics.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 343
+          "_responseTime": 384,
+          "clickCount": 0
         },
         {
           "name": "PEAK System",
           "url": "https://www.peak-system.com/",
           "desc": "CAN/CAN FD 硬件接口与软件工具，车载总线调试硬件首选",
           "favicon": "https://www.peak-system.com/favicon.ico",
-          "_status": "slow",
-          "_responseTime": 1017
+          "_status": "ok",
+          "_responseTime": 70,
+          "clickCount": 0
         },
         {
           "name": "SAE International",
           "url": "https://www.sae.org/",
           "desc": "汽车工程师学会，行业标准 / 技术论文 / 自动驾驶分级定义",
           "favicon": "https://www.sae.org/favicon.ico",
-          "_status": "slow",
-          "_responseTime": 1655
+          "_status": "ok",
+          "_responseTime": 134,
+          "clickCount": 0
         },
         {
           "name": "Embedded.com",
           "url": "https://www.embedded.com/",
           "desc": "嵌入式系统技术社区，车载嵌入式开发技术文章与资讯",
           "favicon": "https://www.embedded.com/favicon.ico",
-          "_status": "slow",
-          "_responseTime": 1093
+          "_status": "ok",
+          "_responseTime": 424,
+          "clickCount": 0
         }
       ]
     },
@@ -170,7 +189,8 @@
           "desc": "在线 C++ 编译运行环境",
           "favicon": "https://cpp.sh/favicon.ico",
           "_status": "slow",
-          "_responseTime": 1008
+          "_responseTime": 1008,
+          "clickCount": 0
         },
         {
           "name": "Z-Library",
@@ -178,7 +198,8 @@
           "desc": "全球最大免费书籍下载库（需科学上网）",
           "favicon": "https://zh.zlibrary-global.se/favicon.ico",
           "_status": "slow",
-          "_responseTime": 1373
+          "_responseTime": 1373,
+          "clickCount": 0
         },
         {
           "name": "godbolt",
@@ -186,7 +207,8 @@
           "desc": "在线多语言编译器与汇编查看器",
           "favicon": "https://godbolt.org/favicon.ico",
           "_status": "ok",
-          "_responseTime": 804
+          "_responseTime": 804,
+          "clickCount": 0
         },
         {
           "name": "cppreference",
@@ -194,7 +216,8 @@
           "desc": "C/C++ 标准库权威参考文档",
           "favicon": "https://en.cppreference.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 876
+          "_responseTime": 876,
+          "clickCount": 0
         },
         {
           "name": "Effective Modern C++",
@@ -202,7 +225,8 @@
           "desc": "Effective Modern C++ 中文翻译版",
           "favicon": "https://github.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 888
+          "_responseTime": 888,
+          "clickCount": 0
         },
         {
           "name": "LeetCode",
@@ -210,7 +234,8 @@
           "desc": "算法刷题与编程能力提升平台",
           "favicon": "https://leetcode.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 266
+          "_responseTime": 266,
+          "clickCount": 0
         },
         {
           "name": "GitHub",
@@ -218,7 +243,8 @@
           "desc": "全球最大代码托管与开源协作平台",
           "favicon": "https://github.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 237
+          "_responseTime": 237,
+          "clickCount": 0
         }
       ]
     },
@@ -233,7 +259,8 @@
           "desc": "Windows 空格键预览文件，类 macOS",
           "favicon": "https://github.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 235
+          "_responseTime": 235,
+          "clickCount": 0
         },
         {
           "name": "Draw.io",
@@ -241,7 +268,8 @@
           "desc": "免费在线流程图与架构图绘制工具",
           "favicon": "https://app.diagrams.net/favicon.ico",
           "_status": "slow",
-          "_responseTime": 1010
+          "_responseTime": 1010,
+          "clickCount": 0
         }
       ]
     },
@@ -257,7 +285,8 @@
           "favicon": "https://www.microsoft.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 256
+          "_responseTime": 256,
+          "clickCount": 0
         },
         {
           "name": "VSCode",
@@ -266,7 +295,8 @@
           "favicon": "https://code.visualstudio.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 313
+          "_responseTime": 313,
+          "clickCount": 0
         },
         {
           "name": "Docker",
@@ -275,7 +305,8 @@
           "favicon": "https://www.docker.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 331
+          "_responseTime": 331,
+          "clickCount": 0
         }
       ]
     },
@@ -290,7 +321,8 @@
           "desc": "全球最大 AI 绘画模型分享平台，海量 LoRA / Checkpoint",
           "favicon": "https://civitai.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 363
+          "_responseTime": 363,
+          "clickCount": 0
         },
         {
           "name": "Hugging Face",
@@ -298,7 +330,8 @@
           "desc": "全球最大开源 AI 模型托管社区，Civitai 最佳替代品",
           "favicon": "https://huggingface.co/favicon.ico",
           "_status": "ok",
-          "_responseTime": 222
+          "_responseTime": 222,
+          "clickCount": 0
         },
         {
           "name": "Tensor.Art",
@@ -306,7 +339,8 @@
           "desc": "功能最接近 Civitai 的替代站，模型库 + 在线生图一体",
           "favicon": "https://tensor.art/favicon.ico",
           "_status": "ok",
-          "_responseTime": 395
+          "_responseTime": 395,
+          "clickCount": 0
         },
         {
           "name": "SeaArt",
@@ -314,7 +348,8 @@
           "desc": "模型社区 + 在线生图，国际化 + 稳定性强，Civitai 热门替代",
           "favicon": "https://www.seaart.ai/favicon.ico",
           "_status": "ok",
-          "_responseTime": 324
+          "_responseTime": 324,
+          "clickCount": 0
         },
         {
           "name": "liblib AI",
@@ -322,7 +357,8 @@
           "desc": "国内最大 SD 模型社区，模型下载 + 在线生图",
           "favicon": "https://www.liblib.art/favicon.ico",
           "_status": "ok",
-          "_responseTime": 74
+          "_responseTime": 74,
+          "clickCount": 0
         },
         {
           "name": "ModelScope",
@@ -330,7 +366,8 @@
           "desc": "阿里云出品，中国版 Hugging Face，模型托管与在线推理",
           "favicon": "https://www.modelscope.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 121
+          "_responseTime": 121,
+          "clickCount": 0
         },
         {
           "name": "Midjourney",
@@ -338,7 +375,8 @@
           "desc": "全球最火 AI 绘画工具，画质顶级，Discord / Web 均可用",
           "favicon": "https://www.midjourney.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 540
+          "_responseTime": 540,
+          "clickCount": 0
         },
         {
           "name": "Leonardo AI",
@@ -346,7 +384,8 @@
           "desc": "AI 图像生成平台，支持多种 SD 模型与工作流，有免费额度",
           "favicon": "https://leonardo.ai/favicon.ico",
           "_status": "slow",
-          "_responseTime": 1119
+          "_responseTime": 1119,
+          "clickCount": 0
         },
         {
           "name": "PixAI",
@@ -354,7 +393,8 @@
           "desc": "专注二次元 / 动漫风格，免费生图 + 模型分享社区",
           "favicon": "https://pixai.art/favicon.ico",
           "_status": "ok",
-          "_responseTime": 510
+          "_responseTime": 510,
+          "clickCount": 0
         },
         {
           "name": "OpenArt",
@@ -362,7 +402,8 @@
           "desc": "在线生图 + 工作流 + 模型，支持多种 SD / Flux 模型",
           "favicon": "https://openart.ai/favicon.ico",
           "_status": "ok",
-          "_responseTime": 525
+          "_responseTime": 525,
+          "clickCount": 0
         },
         {
           "name": "Megaease",
@@ -370,7 +411,8 @@
           "desc": "云原生应用交付与管理平台，支持 SD 云端部署",
           "favicon": "https://megaease.com/favicon.ico",
           "_status": "error",
-          "_responseTime": 0
+          "_responseTime": 0,
+          "clickCount": 0
         },
         {
           "name": "ComfyUI",
@@ -378,7 +420,8 @@
           "desc": "节点式 SD 工作流，本地 / 云端均可，最灵活的生图方案",
           "favicon": "https://www.comfy.org/favicon.ico",
           "_status": "ok",
-          "_responseTime": 220
+          "_responseTime": 220,
+          "clickCount": 0
         }
       ]
     },
@@ -394,7 +437,8 @@
           "favicon": "https://chatgpt.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 643
+          "_responseTime": 643,
+          "clickCount": 0
         },
         {
           "name": "Gemini",
@@ -403,7 +447,8 @@
           "favicon": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64",
           "status": "error",
           "_status": "slow",
-          "_responseTime": 1344
+          "_responseTime": 1344,
+          "clickCount": 0
         },
         {
           "name": "Claude",
@@ -412,7 +457,8 @@
           "favicon": "https://claude.ai/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 528
+          "_responseTime": 528,
+          "clickCount": 0
         },
         {
           "name": "Grok",
@@ -421,7 +467,8 @@
           "favicon": "https://grok.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 686
+          "_responseTime": 686,
+          "clickCount": 0
         },
         {
           "name": "Perplexity",
@@ -430,7 +477,8 @@
           "favicon": "https://www.perplexity.ai/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 638
+          "_responseTime": 638,
+          "clickCount": 0
         },
         {
           "name": "Copilot",
@@ -439,7 +487,8 @@
           "favicon": "https://copilot.microsoft.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 75
+          "_responseTime": 75,
+          "clickCount": 0
         },
         {
           "name": "DeepSeek",
@@ -448,7 +497,8 @@
           "favicon": "https://www.deepseek.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 575
+          "_responseTime": 575,
+          "clickCount": 0
         },
         {
           "name": "豆包",
@@ -457,7 +507,8 @@
           "favicon": "https://www.doubao.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 133
+          "_responseTime": 133,
+          "clickCount": 0
         },
         {
           "name": "Kimi",
@@ -466,7 +517,8 @@
           "favicon": "https://kimi.moonshot.cn/favicon.ico",
           "status": "error",
           "_status": "slow",
-          "_responseTime": 1252
+          "_responseTime": 1252,
+          "clickCount": 0
         },
         {
           "name": "通义",
@@ -475,7 +527,8 @@
           "favicon": "https://tongyi.aliyun.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 292
+          "_responseTime": 292,
+          "clickCount": 0
         },
         {
           "name": "腾讯元宝",
@@ -484,7 +537,8 @@
           "favicon": "https://yuanbao.tencent.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 21
+          "_responseTime": 21,
+          "clickCount": 0
         },
         {
           "name": "文心一言",
@@ -493,7 +547,8 @@
           "favicon": "https://yiyan.baidu.com/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 105
+          "_responseTime": 105,
+          "clickCount": 0
         },
         {
           "name": "Coze",
@@ -502,7 +557,8 @@
           "favicon": "https://www.coze.cn/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 77
+          "_responseTime": 77,
+          "clickCount": 0
         },
         {
           "name": "智谱清言",
@@ -511,7 +567,8 @@
           "favicon": "https://chatglm.cn/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 161
+          "_responseTime": 161,
+          "clickCount": 0
         },
         {
           "name": "夸克 AI",
@@ -520,7 +577,8 @@
           "favicon": "https://quark.sm.cn/favicon.ico",
           "status": "error",
           "_status": "ok",
-          "_responseTime": 73
+          "_responseTime": 73,
+          "clickCount": 0
         }
       ]
     },
@@ -535,7 +593,8 @@
           "desc": "谷歌地图，全球最强地图导航服务",
           "favicon": "https://maps.google.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 236
+          "_responseTime": 236,
+          "clickCount": 0
         },
         {
           "name": "Instagram",
@@ -543,7 +602,8 @@
           "desc": "全球最大图片与短视频社交平台",
           "favicon": "https://www.instagram.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 366
+          "_responseTime": 366,
+          "clickCount": 0
         },
         {
           "name": "YouTube",
@@ -551,7 +611,8 @@
           "desc": "谷歌旗下全球最大视频分享平台",
           "favicon": "https://www.youtube.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 209
+          "_responseTime": 209,
+          "clickCount": 0
         }
       ]
     },
@@ -566,7 +627,8 @@
           "desc": "栗子的 AI 设计方法论知识库",
           "favicon": "https://www.feishu.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 463
+          "_responseTime": 463,
+          "clickCount": 0
         },
         {
           "name": "栗子的设计笔记 · B站",
@@ -574,7 +636,8 @@
           "desc": "AIGC 与 UI 设计内容创作，B站主页",
           "favicon": "https://www.bilibili.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 390
+          "_responseTime": 390,
+          "clickCount": 0
         },
         {
           "name": "栗子的设计笔记 · 抖音",
@@ -582,7 +645,8 @@
           "desc": "设计干货与 AI 工具分享，抖音主页",
           "favicon": "https://www.douyin.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 44
+          "_responseTime": 44,
+          "clickCount": 0
         },
         {
           "name": "栗子的设计笔记 · 站酷",
@@ -590,7 +654,8 @@
           "desc": "设计作品集与 AIGC 案例展示",
           "favicon": "https://www.zcool.com.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 113
+          "_responseTime": 113,
+          "clickCount": 0
         },
         {
           "name": "飞书妙记",
@@ -598,7 +663,8 @@
           "desc": "AI 自动提取视频文案，飞书妙记",
           "favicon": "https://www.feishu.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 467
+          "_responseTime": 467,
+          "clickCount": 0
         },
         {
           "name": "栗子的设计笔记 · 小红书",
@@ -606,7 +672,8 @@
           "desc": "互联网资深体验设计师，AIGC 工作项目持续分享",
           "favicon": "https://www.xiaohongshu.com/favicon.ico",
           "_status": "ok",
-          "_responseTime": 95
+          "_responseTime": 95,
+          "clickCount": 0
         }
       ]
     },
@@ -621,7 +688,8 @@
           "desc": "英伟达 GeForce 显卡官方驱动下载",
           "favicon": "https://www.nvidia.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 920
+          "_responseTime": 920,
+          "clickCount": 0
         },
         {
           "name": "微星 MSI",
@@ -629,7 +697,8 @@
           "desc": "微星显卡与主板官方驱动下载",
           "favicon": "https://www.msi.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 176
+          "_responseTime": 176,
+          "clickCount": 0
         },
         {
           "name": "华硕 ASUS",
@@ -637,7 +706,8 @@
           "desc": "华硕显卡与硬件官方驱动下载",
           "favicon": "https://www.asus.com.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 910
+          "_responseTime": 910,
+          "clickCount": 0
         },
         {
           "name": "七彩虹",
@@ -645,7 +715,8 @@
           "desc": "七彩虹显卡官方驱动与工具下载",
           "favicon": "https://www.colorful.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 365
+          "_responseTime": 365,
+          "clickCount": 0
         }
       ]
     },
@@ -660,7 +731,8 @@
           "desc": "阿里巴巴矢量图标库，海量免费图标",
           "favicon": "https://www.iconfont.cn/favicon.ico",
           "_status": "ok",
-          "_responseTime": 49
+          "_responseTime": 49,
+          "clickCount": 0
         }
       ]
     }
