@@ -1,0 +1,29 @@
+{
+  "name": "nav-site",
+  "version": "1.0.0",
+  "description": "个人网址导航站 - 前后端集成版",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node build.js",
+    "preview": "vite preview",
+    "start": "node index.js",
+    "server": "node index.js"
+  },
+  "keywords": ["导航站", "vue", "express"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "vue": "^3.4.0",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
