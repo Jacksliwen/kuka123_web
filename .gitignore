@@ -23,13 +23,7 @@ logs/
 .env
 .env.local
 
-# 不需要上传的源代码（生产环境只用dist）
-src/
-public/
-vite.config.js
-index.html
-
-
 # 其他
 *.tar.gz
 *.zip
+dist/

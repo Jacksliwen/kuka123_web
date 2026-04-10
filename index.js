@@ -215,14 +215,14 @@ app.get('/api/check-url', async (req, res) => {
 
 // ===== 前端静态文件服务 =====
 
-const distPath = path.join(__dirname, 'dist')
+const distPath = __dirname
 
 if (fs.existsSync(distPath)) {
   // 托管静态文件
   app.use(express.static(distPath))
   
   // 所有路由指向 index.html（支持Vue Router的history模式）
-  app.get('*', (req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(distPath, 'index.html'))
   })
   
