@@ -1,29 +1,59 @@
-# 开发依赖
+# ===== Node.js & npm =====
 node_modules/
+package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# 编辑器
+# ===== 构建输出 =====
+dist/
+.vite/
+
+# ===== IDE & 编辑器 =====
 .vscode/
 .idea/
 *.swp
 *.swo
+*.swn
 *~
+.sublime-workspace
+.sublime-project
 
-# 操作系统
+# ===== 操作系统 =====
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
 Thumbs.db
+ehthumbs.db
 
-# 日志
+# ===== 环境变量 =====
+.env
+.env.local
+.env.*.local
+
+# ===== 日志文件 =====
 logs/
 *.log
 
-# 本地环境变量
-.env
-.env.local
-
-# 其他
+# ===== 压缩包 =====
 *.tar.gz
 *.zip
-dist/
+*.rar
+*.7z
+
+# ===== 临时文件 =====
+*.tmp
+*.temp
+.cache/
+
+# ===== macOS 特定 =====
+.AppleDouble
+.LSOverride
+
+# ===== Windows 特定 =====
+Thumbs.db
+.LSOverride
+Desktop.ini
