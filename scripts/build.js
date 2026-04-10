@@ -18,20 +18,20 @@
 const fs = require('fs')
 const path = require('path')
 
-const distDir = path.join(__dirname, 'dist')
+const distDir = path.join(__dirname, '..', 'dist')
 
 console.log('📦 构建后处理...\n')
 
 // 1. 复制后端入口文件
 fs.copyFileSync(
-  path.join(__dirname, 'index.js'),
+  path.join(__dirname, '..', 'index.js'),
   path.join(distDir, 'index.js')
 )
 console.log('✓ 复制 index.js')
 
 // 2. 复制生产环境 package.json
 fs.copyFileSync(
-  path.join(__dirname, 'package.dist.json'),
+  path.join(__dirname, '..', 'package.dist.json'),
   path.join(distDir, 'package.json')
 )
 console.log('✓ 复制 package.json')
@@ -44,7 +44,7 @@ if (!fs.existsSync(dataDir)) {
 }
 
 // 复制默认数据文件
-const srcDataFile = path.join(__dirname, 'data', 'categories.json')
+const srcDataFile = path.join(__dirname, '..', 'data', 'categories.json')
 const destDataFile = path.join(dataDir, 'categories.json')
 if (fs.existsSync(srcDataFile)) {
   fs.copyFileSync(srcDataFile, destDataFile)
@@ -55,23 +55,9 @@ if (fs.existsSync(srcDataFile)) {
   console.log('✓ 创建空数据文件 categories.json')
 }
 
-// 4. 复制部署说明
-const deployFile = path.join(__dirname, 'DEPLOY.md')
-if (fs.existsSync(deployFile)) {
-  fs.copyFileSync(
-    deployFile,
-    path.join(distDir, 'DEPLOY.md')
-  )
-  console.log('✓ 复制 DEPLOY.md')
-}
-
+// 4. 部署说明已合并到 README.md
 console.log('\n✅ 构建完成！')
-console.log('\n部署方法：')
-console.log('  1. 将 dist 目录压缩上传到服务器')
-console.log('  2. 解压到宝塔网站目录')
-console.log('  3. 在宝塔面板创建 Node 项目')
-console.log('  4. 启动文件选择 index.js')
-console.log('  5. 配置反向代理')
+console.log('\n部署说明请参考 README.md 中的"生产部署"章节')
 console.log('\n目录结构：')
 console.log('  dist/')
 console.log('  ├── index.js          # 启动文件')
