@@ -55,9 +55,19 @@ if (fs.existsSync(srcDataFile)) {
   console.log('✓ 创建空数据文件 categories.json')
 }
 
-// 4. 部署说明已合并到 README.md
+// 4. 复制 PM2 配置文件
+const ecosystemFile = path.join(__dirname, '..', 'ecosystem.config.js')
+if (fs.existsSync(ecosystemFile)) {
+  fs.copyFileSync(
+    ecosystemFile,
+    path.join(distDir, 'ecosystem.config.js')
+  )
+  console.log('✓ 复制 ecosystem.config.js (PM2 配置)')
+}
+
+// 5. 部署说明已合并到 README.md
 console.log('\n✅ 构建完成！')
-console.log('\n部署说明请参考 README.md 中的"生产部署"章节')
+console.log('\n部署说明请参考 README.md 和 PM2_GUIDE.md 章节')
 console.log('\n目录结构：')
 console.log('  dist/')
 console.log('  ├── index.js          # 启动文件')
