@@ -27,7 +27,7 @@
         </a>
       </nav>
       <div class="sb-foot">
-        <a href="#">关于本站</a><a href="#">免责声明</a>
+        <a href="#" @click.prevent="showModal('about')">关于本站</a><a href="#" @click.prevent="showModal('disclaimer')">免责声明</a>
       </div>
     </aside>
 
@@ -402,6 +402,92 @@
         </div>
       </footer>
     </div>
+
+    <!-- 模态框 -->
+    <div v-if="modalOpen" class="modal-overlay" @click="closeModal">
+      <div class="modal-box" @click.stop>
+        <button class="modal-close" @click="closeModal">✕</button>
+        
+        <!-- 关于本站 -->
+        <div v-if="modalType === 'about'" class="modal-content">
+          <h2>关于本站</h2>
+          <div class="modal-text">
+            <p><strong>KUKA123 导航站</strong>是一个精心整理的网址导航平台，致力于为开发者、工程师和各领域专业人士提供高质量的资源和工具。</p>
+            
+            <h3>📋 网站特色</h3>
+            <ul>
+              <li><strong>分类清晰</strong> - 按功能和行业分类，快速找到所需资源</li>
+              <li><strong>精选优质</strong> - 每个链接都经过验证，确保可访问性</li>
+              <li><strong>持续更新</strong> - 定期添加新的有价值网站</li>
+              <li><strong>用户友好</strong> - 简洁高效的界面设计，支持深浅主题</li>
+            </ul>
+
+            <h3>🔧 主要分类</h3>
+            <ul>
+              <li>⚙️ 汽车工程师 - 嵌入式开发、AUTOSAR、实时系统</li>
+              <li>📚 学习工具 - 编程资源、算法刷题、技术文档</li>
+              <li>⚡ 效率工具 - 生产力应用、绘图工具</li>
+              <li>🖥️ 软件官网 - 主流开发工具官方下载</li>
+              <li>🎨 AI 模型 - SD 模型社区、AI 绘画平台</li>
+              <li>🤖 AI 助手 - ChatGPT、Claude、DeepSeek 等</li>
+            </ul>
+
+            <h3>👤 关于作者</h3>
+            <p>本站由 <strong>Jacksliwen</strong> 维护，欢迎 GitHub 贡献和反馈。</p>
+
+            <h3>🔗 联系方式</h3>
+            <p>GitHub: <a href="https://github.com/Jacksliwen/kuka123_web" target="_blank">kuka123_web</a></p>
+            <p>域名: <strong>kuka123.cool</strong></p>
+          </div>
+        </div>
+
+        <!-- 免责声明 -->
+        <div v-if="modalType === 'disclaimer'" class="modal-content">
+          <h2>免责声明</h2>
+          <div class="modal-text">
+            <p><strong>重要提示</strong>：在使用本网站之前，请仔细阅读以下免责声明。使用本网站即表示您同意以下条款。</p>
+
+            <h3>📌 内容声明</h3>
+            <ul>
+              <li>本站所有链接均为第三方网站，内容版权归原作者或第三方所有</li>
+              <li>本站仅作为导航工具，不对第三方网站的内容、准确性、合法性及安全性负责</li>
+              <li>本站不对因访问或使用第三方网站而产生的任何后果承担责任</li>
+            </ul>
+
+            <h3>⚠️ 风险提示</h3>
+            <ul>
+              <li>用户应自行判断第三方网站的安全性和真实性</li>
+              <li>本站不保证所有链接的有效性，链接可能会失效或变动</li>
+              <li>使用外部网站服务，风险由用户自行承担</li>
+              <li>请勿在不信任的网站输入个人信息和敏感数据</li>
+            </ul>
+
+            <h3>🚫 禁止条款</h3>
+            <ul>
+              <li>禁止用于任何违法或不当用途</li>
+              <li>禁止爬虫自动采集内容</li>
+              <li>禁止恶意攻击或破坏本站及其他网站</li>
+              <li>禁止传播false信息或骚扰他人</li>
+            </ul>
+
+            <h3>📊 数据隐私</h3>
+            <ul>
+              <li>本站记录用户的点击访问统计，仅用于改进服务质量</li>
+              <li>不会收集个人隐私信息，不会与第三方共享</li>
+              <li>用户可随时清除浏览记录</li>
+            </ul>
+
+            <h3>⚖️ 法律声明</h3>
+            <p>本站内容遵守中华人民共和国相关法律法规。若因链接指向的第三方内容违反法律，本站不承担责任。如有侵权，请及时联系删除。</p>
+
+            <h3>💬 服务变更</h3>
+            <p>本站保留随时修改、删除或中止服务的权利，恕不另行通知。</p>
+
+            <p style="margin-top:20px;color:#999;font-size:0.9rem;"><em>最后更新：2026年4月</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -416,6 +502,8 @@ const sf          = ref(false)
 const cats        = ref([])
 const active      = ref('')
 const wrapEl      = ref(null)
+const modalOpen   = ref(false)
+const modalType   = ref('about')
 
 // 网站配置
 const site = ref({
@@ -470,6 +558,17 @@ function jump(id) {
   if (!id) return
   active.value = id; q.value = ''
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+function showModal(type) {
+  modalType.value = type
+  modalOpen.value = true
+  document.body.style.overflow = 'hidden'
+}
+
+function closeModal() {
+  modalOpen.value = false
+  document.body.style.overflow = ''
 }
 
 function calcCols(w) {
@@ -825,5 +924,110 @@ body {
   .sec { padding:8px; border-radius:8px; }
   .ft-info { font-size:.6rem; }
   .bn-title-main { font-size:1.8rem; }
+}
+
+/* ══ 模态框 ══ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+  animation: overlayIn .2s ease-out;
+}
+
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes boxIn { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+
+.modal-box {
+  background: var(--card-bg);
+  border: 1px solid var(--card-bd);
+  border-radius: clamp(12px, 1vw, 16px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+  max-width: 600px; width: 100%;
+  max-height: 80vh; overflow-y: auto;
+  padding: clamp(24px, 4vw, 32px);
+  position: relative;
+  animation: boxIn .2s ease-out;
+  scrollbar-width: thin;
+  scrollbar-color: var(--acc2) var(--bg2);
+}
+
+.modal-box::-webkit-scrollbar { width: 6px; }
+.modal-box::-webkit-scrollbar-track { background: transparent; }
+.modal-box::-webkit-scrollbar-thumb { background: var(--acc2); border-radius: 3px; }
+.modal-box::-webkit-scrollbar-thumb:hover { background: var(--acc); }
+
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border: none; background: var(--bg2); border-radius: 50%;
+  cursor: pointer; color: var(--text3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; transition: all .15s;
+  z-index: 10;
+}
+.modal-close:hover { background: var(--acc); color: white; }
+
+.modal-content h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--acc);
+}
+
+.modal-content h3 {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  color: var(--text2);
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-text {
+  color: var(--text2);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+.modal-text p {
+  margin-bottom: 14px;
+}
+
+.modal-text ul {
+  margin-left: 24px;
+  margin-bottom: 14px;
+  list-style: disc;
+}
+
+.modal-text li {
+  margin-bottom: 8px;
+}
+
+.modal-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.modal-text a {
+  color: var(--acc);
+  text-decoration: underline;
+  transition: color .2s;
+}
+
+.modal-text a:hover {
+  color: var(--acc2);
+}
+
+@media (max-width: 640px) {
+  .modal-box {
+    max-height: 90vh;
+    padding: clamp(16px, 3vw, 24px);
+  }
+  
+  .modal-close {
+    width: 28px; height: 28px;
+    font-size: 1rem;
+  }
 }
 </style>
