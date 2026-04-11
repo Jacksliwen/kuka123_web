@@ -213,6 +213,79 @@ app.get('/api/check-url', async (req, res) => {
   }
 })
 
+// 记录网址点击 - 直接更新categories.json中的clickCount
+app.post('/api/click', (req, res) => {
+  const { url } = req.body
+  if (!url) {
+    return res.status(400).json({ error: '缺少url参数' })
+  }
+  
+  try {
+    const data = readData()
+    let found = false
+    
+    // 遍历所有分类，查找并更新对应网址
+    for (const category of data.categories) {
+      for (const site of category.sites) {
+        if (site.url === url) {
+          if (typeof site.clickCount !== 'number') {
+            site.clickCount = 0
+          }
+          site.clickCount += 1
+          found = true
+          break
+        }
+      }
+      if (found) break
+    }
+    
+    if (found) {
+      if (writeData(data)) {
+        res.json({ ok: true })
+      } else {
+        res.status(500).json({ error: '保存失败' })
+      }
+    } else {
+      res.status(404).json({ error: '未找到该网址' })
+    }
+  } catch (err) {
+    console.error('记录点击失败:', err)
+    res.status(500).json({ error: '记录点击失败' })
+  }
+})
+
+// 获取统计数据 - 从categories中收集clickCount
+app.get('/api/stats', (req, res) => {
+  try {
+    const data = readData()
+    const stats = []
+    
+    for (const category of data.categories) {
+      for (const site of category.sites) {
+        stats.push({
+          name: site.name,
+          url: site.url,
+          category: category.label,
+          clickCount: site.clickCount || 0
+        })
+      }
+    }
+    
+    // 按点击数排序
+    stats.sort((a, b) => b.clickCount - a.clickCount)
+    
+    const totalClicks = stats.reduce((sum, item) => sum + item.clickCount, 0)
+    
+    res.json({
+      total: totalClicks,
+      stats: stats.filter(s => s.clickCount > 0)
+    })
+  } catch (err) {
+    console.error('获取统计失败:', err)
+    res.status(500).json({ error: '获取统计失败' })
+  }
+})
+
 // ===== 前端静态文件服务 =====
 
 const distPath = __dirname

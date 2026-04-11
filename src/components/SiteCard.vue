@@ -1,6 +1,6 @@
 <template>
   <a :href="site.url" target="_blank" rel="noopener noreferrer"
-    class="card" :style="{'--j': idx ?? 0}">
+    class="card" :style="{'--j': idx ?? 0}" @click="recordClick">
 
     <!-- 左侧选中竖条 -->
     <span class="card-accent" aria-hidden="true"></span>
@@ -53,6 +53,23 @@ const faviconUrl = computed(() => {
 
 const err = computed(() => errCount.value >= 3)
 function onErr() { errCount.value++ }
+
+// 记录点击
+async function recordClick() {
+  try {
+    await fetch('/api/click', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        url: props.site.url,
+        name: props.site.name
+      })
+    })
+  } catch (error) {
+    console.error('记录点击失败:', error)
+    // 不影响用户跳转，静默失败
+  }
+}
 </script>
 
 <style scoped>
